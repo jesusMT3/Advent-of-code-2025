@@ -1,0 +1,30 @@
+if __name__ == "__main__":
+    example_input = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124"
+    # example_input = "11-22, 95-115"
+    example_input = "52-75,71615244-71792700,89451761-89562523,594077-672686,31503-39016,733-976,1-20,400309-479672,458-635,836793365-836858811,3395595155-3395672258,290-391,5168-7482,4545413413-4545538932,65590172-65702074,25-42,221412-256187,873499-1078482,118-154,68597355-68768392,102907-146478,4251706-4487069,64895-87330,8664371543-8664413195,4091-5065,537300-565631,77-115,83892238-83982935,6631446-6694349,1112-1649,7725-9776,1453397-1493799,10240-12328,15873-20410,1925-2744,4362535948-4362554186,3078725-3256936,710512-853550,279817-346202,45515-60928,3240-3952"
+    result = 0
+
+    # separate each range
+    id_ranges = example_input.split(",")
+    sequences = []
+
+    # create list of sequences
+    for id_range in id_ranges:
+        # get lower and upper limits
+        lower, upper = [int(i) for i in id_range.split("-")]
+        # create the sequence for each input
+        sequence = [str(i) for i in list(range(lower, upper+1))]
+        sequences.append(sequence)
+
+    # run through each sequence
+    for sequence in sequences:
+        # run through each id on the sequence
+        for id in sequence:
+            if id[0] == 0:
+                pass
+            # check for strings repeating themselves
+            res = id in (id + id)[1:-1]
+            if res:
+                result += int(id)
+
+    print(result)
